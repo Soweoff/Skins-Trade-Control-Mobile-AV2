@@ -4,5 +4,6 @@ describe("Página inicial", () => {
 
     cy.contains("Containers").should("exist");
     cy.get("img").should("have.length.greaterThan", 0);
+    cy.get("title").should("have.length.greaterThan", 0);
   });
 });
