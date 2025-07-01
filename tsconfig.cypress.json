@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
-    "target": "ES6",
     "module": "commonjs",
-    "lib": ["dom", "esnext"],
+    "target": "es6",
+    "lib": ["es6", "dom"],
     "types": ["cypress"],
+    "moduleResolution": "node16",
+    "allowJs": true,
     "esModuleInterop": true,
-    "moduleResolution": "node"
+    "skipLibCheck": true
   },
   "include": ["cypress/**/*.ts"]
 }

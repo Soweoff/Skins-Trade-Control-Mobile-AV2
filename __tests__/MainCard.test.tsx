@@ -19,7 +19,7 @@ describe("MainCard", () => {
     const { getByRole } = render(
       <MainCard
         title="Clickable Card"
-        image="https://example.com/image.jpg"
+        image="https://res.cloudinary.com/dvqbwddan/image/upload/v1747511829/projeto%20SKT/case/Killowatt%20Case.png.png"
         onPress={mockPress}
       />
     );
@@ -32,7 +32,7 @@ describe("MainCard", () => {
     const { getByRole } = render(
       <MainCard
         title="Image Card"
-        image="https://example.com/image.jpg"
+        image="https://res.cloudinary.com/dvqbwddan/image/upload/v1747511829/projeto%20SKT/case/Killowatt%20Case.png.png"
         onPress={() => {}}
       />
     );

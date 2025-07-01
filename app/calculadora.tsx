@@ -6,34 +6,45 @@ import {
   StyleSheet,
   ScrollView,
 } from "react-native";
-import { useState, useEffect } from "react";
-import db from "../database/db.json";
+import { useState } from "react";
 import { Stack, useRouter, useLocalSearchParams } from "expo-router";
-import { useAuth } from "../context/AuthContext";
+
+const itens = [
+  {
+    id: "ak",
+    nome: "AK-47 Redline",
+    preco: 300,
+  },
+  {
+    id: "awp",
+    nome: "AWP Asiimov",
+    preco: 900,
+  },
+  {
+    id: "m4a1",
+    nome: "M4A1-S Decimator",
+    preco: 750,
+  },
+  {
+    id: "glock",
+    nome: "Glock-18 Fade",
+    preco: 500,
+  },
+];
 
 export default function Calculadora() {
   const [quantidades, setQuantidades] = useState<Record<string, string>>({});
   const [total, setTotal] = useState<number | null>(null);
 
-  const { user } = useAuth();
   const router = useRouter();
   const params = useLocalSearchParams();
 
   const modo = params.modo === "alternativo" ? "alternativo" : "padrao";
   const multiplicador = modo === "alternativo" ? 0.8 : 0.65;
 
-  // Proteção da rota
-  useEffect(() => {
-    if (!user) {
-      router.replace("/login");
-    }
-  }, [user]);
-
-  if (!user) return null;
-
   const calcular = () => {
     let soma = 0;
-    db.itens.forEach((item) => {
+    itens.forEach((item) => {
       const qtd = parseInt(quantidades[item.id] || "0");
       soma += item.preco * qtd * multiplicador;
     });
@@ -60,7 +71,7 @@ export default function Calculadora() {
       </View>
 
       <ScrollView contentContainerStyle={styles.content}>
-        {db.itens.map((item) => (
+        {itens.map((item) => (
           <View key={item.id} style={styles.itemRow}>
             <Text>{item.nome}</Text>
             <TextInput

@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import { Stack } from "expo-router";
 
-import Header from "../components/Header 2";
+import Header from "../components/Header2";
 
 export default function Home() {
   return (
