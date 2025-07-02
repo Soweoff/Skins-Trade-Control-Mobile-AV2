@@ -1,112 +1,163 @@
-# 📦 CS:GO Trade Helper - App Mobile
+# 🎮 Skins Trade Control
 
-Um app mobile desenvolvido com **React Native + Expo Router**, que ajuda usuários a calcular quanto receberiam vendendo caixas e cápsulas de CS:GO. O projeto também implementa autenticação, proteção de rotas, navegação com parâmetros e uso de ActionSheet para facilitar a navegação entre funcionalidades.
+Aplicativo mobile desenvolvido com **Expo (React Native)** para controle e cálculo de valores de **skins de Counter-Strike**, como caixas e cápsulas. Os dados são armazenados localmente via API simulada (`json-server` com `db.json`), e o app conta com testes automatizados **unitários** e **E2E (end-to-end)**.
 
-## 🔧 Tecnologias Utilizadas
+---
 
-- [Expo Router](https://expo.github.io/router)
-- React Native
+## Tecnologias utilizadas
+
+- React Native + Expo
 - TypeScript
-- Context API
-- JSON Server (mock de dados)
-- ActionSheet do `@expo/react-native-action-sheet`
+- `json-server` (para simular API REST)
+- React Native Testing Library (para testes unitários)
+- Cypress (para testes E2E)
 
 ---
 
-## 📱 Funcionalidades
+## Diferença entre testes unitários e E2E
 
-- ✅ **Login e Registro de Usuário**
-- ✅ **Proteção de Rota** (acesso à calculadora somente autenticado)
-- ✅ **Calculadora de Valor no PIX (0.65x ou 0.8x)**
-- ✅ **Alternância entre modos de cálculo com parâmetros de rota**
-- ✅ **Uso de `useSearchParams` na navegação**
-- ✅ **Menu com ActionSheet para navegar entre páginas**
-- ✅ **Listagem de Itens (caixas e cápsulas) a partir de um arquivo `db.json`**
+Testes UnitáriosValidam componentes ou funções isoladamente. Usamos @testing-library/react-native para testar, por exemplo, se o componente MainCard exibe corretamente um título ou executa a ação de clique.
+
+Testes End-to-End (E2E)Simulam a experiência real do usuário em toda a aplicação. Com Cypress, garantimos que o fluxo de login, containers ou cálculo funcione conforme o esperado em tempo real, interagindo com todos os sistemas envolvidos.
 
 ---
 
-## 🔐 Autenticação
+## Instruções para rodar o projeto
 
-O app utiliza Context API para gerenciar o estado de autenticação do usuário. Usuários não autenticados são redirecionados automaticamente ao tentar acessar rotas protegidas (como a calculadora).
-
----
-
-## 📊 Calculadora
-
-A Calculadora permite inserir a quantidade de cada item (caixa/cápsula) que o usuário possui e retorna o total a receber no PIX com base no modo de cálculo escolhido:
-
-- **Modo Padrão:** 65% do valor (multiplicado por 0.65)
-- **Modo Alternativo:** 80% do valor (multiplicado por 0.8), ativado via parâmetro na URL (`?modo=0.8`)
-
----
-
-## 🧭 Navegação
-
-A navegação é feita usando o **Expo Router**, com:
-
-- Stack Navigation
-- Tabs (opcional)
-- Parâmetros de navegação (`useSearchParams`)
-- `useRouter` para redirecionamentos
-- ActionSheet para abrir opções rápidas de navegação
-
----
-
-## 📁 Estrutura de Arquivos
+1. Clone o repositório:
 
 ```bash
-app/
-├── index.tsx                # Página inicial (home)
-├── login.tsx                # Tela de login
-├── register.tsx             # Tela de cadastro
-├── calculadora.tsx         # Calculadora protegida
-├── Itens/
-│   ├── containers.tsx      # Listagem de caixas e cápsulas
-│   ├── caixas.tsx          # Detalhes das caixas
-│   └── capsulas.tsx        # Detalhes das cápsulas
-components/
-├── Header.tsx              # Header dinâmico com ActionSheet
-├── Card.tsx                # Card simples
-├── MainCard.tsx            # Card com imagem e detalhes
-context/
-├── AuthContext.tsx         # Contexto de autenticação
-database/
-├── db.json                 # Arquivo com lista de itens
+git clone https://github.com/Soweoff/Skins-Trade-Control-Mobile-AV2.git
+cd seu-repositorio
+```
 
-▶️ Como Rodar o Projeto
+2. Instale as dependências:
 
-# 1. Clone o repositório
-git clone https://github.com/seu-usuario/seu-repo.git
+```bash
+yarn install
+```
 
-# 2. Acesse a pasta
-cd seu-repo
+3. Inicie a API local (`db.json`):
 
-# 3. Instale as dependências
-npm install
+```bash
+npx json-server --watch database/db.json --port 8090
+```
 
-# 4. Inicie o projeto
-npx expo start
+4. Rode o app:
 
+```bash
+npx expo start --web
+```
 
-# Prints da Tela
+5. Acesse via navegador (modo web):
 
-![Tela 1](https://res.cloudinary.com/dvqbwddan/image/upload/v1747716641/projeto%20SKT/GITHUB%20dispositivos%20moveis/xnethrxyabow8fyqkjm1.png)
-![Tela 2](https://res.cloudinary.com/dvqbwddan/image/upload/v1747716640/projeto%20SKT/GITHUB%20dispositivos%20moveis/tgfojlxglutwtcbela5y.png)
-![Tela 3](https://res.cloudinary.com/dvqbwddan/image/upload/v1747716640/projeto%20SKT/GITHUB%20dispositivos%20moveis/dsz3yox2yqlwrxnn5xoy.png)
-![Tela 4](https://res.cloudinary.com/dvqbwddan/image/upload/v1747716640/projeto%20SKT/GITHUB%20dispositivos%20moveis/alt0dekyrv8u5yjereqk.png)
-![Tela 5](https://res.cloudinary.com/dvqbwddan/image/upload/v1747716640/projeto%20SKT/GITHUB%20dispositivos%20moveis/dpgjfbripyko0pqosdos.png)
-![Tela 6](https://res.cloudinary.com/dvqbwddan/image/upload/v1747716640/projeto%20SKT/GITHUB%20dispositivos%20moveis/wqhzykobneytiqgdq7db.png)
-![Tela 7](https://res.cloudinary.com/dvqbwddan/image/upload/v1747716640/projeto%20SKT/GITHUB%20dispositivos%20moveis/mgbznixj5oqa76btjzu4.png)
-![Tela 8](https://res.cloudinary.com/dvqbwddan/image/upload/v1747716639/projeto%20SKT/GITHUB%20dispositivos%20moveis/ctvzrloytquj8apcuw0q.png)
-![Tela 9](https://res.cloudinary.com/dvqbwddan/image/upload/v1747716639/projeto%20SKT/GITHUB%20dispositivos%20moveis/uuo2pdbvqrtiqwx7kkel.png)
-![Tela 10](https://res.cloudinary.com/dvqbwddan/image/upload/v1747716639/projeto%20SKT/GITHUB%20dispositivos%20moveis/qju6gdf25tie65om4arq.png)
-![Tela 11](https://res.cloudinary.com/dvqbwddan/image/upload/v1747716639/projeto%20SKT/GITHUB%20dispositivos%20moveis/z72yyafj6mbu1b5ihzhy.png)
-![Tela 12](https://res.cloudinary.com/dvqbwddan/image/upload/v1747716639/projeto%20SKT/GITHUB%20dispositivos%20moveis/sgtgk2cpsaiqv3puqsif.png)
-![Tela 13](https://res.cloudinary.com/dvqbwddan/image/upload/v1747716639/projeto%20SKT/GITHUB%20dispositivos%20moveis/yavk5ecxh0wyq4lilrby.png)
+- `http://localhost:8081`
 
+---
 
-🙋‍♂️ Autor
+## 🧪 Testes Unitários
 
-Desenvolvido por Everton Souza Wience (Sowe)
-[Linktree](https://linktr.ee/Soweoff)
+Testes com [React Native Testing Library](https://testing-library.com/docs/react-native-testing-library/intro/) garantem que componentes individuais se comportem corretamente.
 
+### Testes implementados
+
+**Componente `MainCard`**
+
+- Renderiza corretamente o título
+- Dispara o evento `onPress` ao clicar
+- Renderiza a imagem com o `testID` esperado
+
+### Executar testes unitários
+
+```bash
+yarn test
+```
+
+---
+
+## Testes End-to-End (Cypress)
+
+Utilizamos o [Cypress](https://www.cypress.io/) para testar fluxos completos da aplicação.
+
+### Testes E2E criados
+
+- **login.cy.js**
+
+  - Acessa tela de login
+  - Preenche email e senha
+  - Verifica botão "Entrar"
+
+- **calculadora.cy.js**
+
+  - Acessa `/calculadora`
+  - Preenche valores de skins
+  - Verifica resultado do cálculo
+
+- **list_skin.cy.js**
+  - Acessa `/Itens/containers`
+  - Verifica que há lista de itens e imagens
+
+### Rodar o Cypress
+
+1. Instale:
+
+```bash
+yarn add -D cypress
+```
+
+2. Use o comando:
+
+```bash
+TS_NODE_PROJECT=tsconfig.cypress.json yarn cypress open
+```
+
+> ⚠️ Esse comando garante compatibilidade com o TypeScript + configuração Cypress.
+
+### Estrutura Cypress
+
+```
+cypress/
+├── e2e/
+│   ├── login.cy.js
+│   ├── calculadora.cy.js
+│   └── list_skin.cy.js
+├── support/
+│   ├── e2e.ts
+│   └── commands.ts
+cypress.config.ts
+tsconfig.cypress.json
+```
+
+---
+
+## Diferença entre testes Unitários e E2E
+
+| Tipo     | O que testa                                           | Ferramenta usada             |
+| -------- | ----------------------------------------------------- | ---------------------------- |
+| Unitário | Testa componentes isoladamente                        | React Native Testing Library |
+| E2E      | Testa o fluxo completo da aplicação simulando usuário | Cypress                      |
+
+---
+
+## Base de dados simulada
+
+Os dados das skins são simulados via `db.json` e incluem campos como:
+
+```json
+{
+  "id": 1,
+  "nome": "Kilowatt Case",
+  "preco": 18.0,
+  "tipo": "caixa",
+  "imagem": "https://..."
+}
+```
+
+Você pode editá-lo em `database/db.json`.
+
+---
+
+- Testes Cypress devem ser executados com o app rodando em modo web (`yarn start`)
+- `json-server` precisa estar ativo em `http://localhost:8090`
+
+---
